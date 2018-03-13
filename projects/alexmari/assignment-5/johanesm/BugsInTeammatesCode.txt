@@ -1,0 +1,48 @@
+
+//In the Appt.java class, the isValid() method:
+private void isValid() {
+        int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth-1);
+                    
+        // ASSIGNMENT #1 Bug removed so validity stays
+        if(startHour<0 || startHour>23)
+            this.valid=false;
+        else
+            if(startMinute<0 || startMinute>59)
+                this.valid=false;
+            else
+                if(startDay<1 || startDay>NumDaysInMonth)
+                    this.valid=false;
+                else
+
+//here is the first bug that I have found in my teammate's code:
+//the and logic throws off the check because a number cannot be 
+//both lower than 1 and higher than 12
+                    if(startMonth<1 && startMonth>12)
+                        this.valid=false;
+                    else
+                        this.valid=true;
+    }
+
+
+
+//in the Appt.java class, the represntationApp() method:
+    private String represntationApp(){
+        String half = (getStartHour() > 11) ? "pm" : "am";
+        int printableHour = getStartHour();
+        if (printableHour > 11)
+        {
+            printableHour -= 12;
+        }
+
+
+//teammate has changed the way a printable hour would show with setting the logic to not equals
+//instead of an equals logic. This creates a bug in the code where the hours are not printing right,
+//where all of the hours are printing 12 instead of what they are supposed to be.
+        if (printableHour != 0)
+        {
+            printableHour = 12;
+        }
+        String represntationApp= printableHour +":"+ getStartMinute() + half;
+        return represntationApp;
+        
+    }
